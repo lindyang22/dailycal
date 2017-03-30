@@ -7,6 +7,7 @@
     <link href="nv/build/nv.d3.css" rel="stylesheet" type="text/css">
     <script src="d3v3/d3.js" charset="utf-8"></script>
     <script src="nv/build/nv.d3.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script type="text/javascript" src="filterAdmitted.js"></script>
 
     <style>
@@ -25,8 +26,65 @@
     </style>
 </head>
 <body>
+<div class="container">
+<div class = "row">
+    <div class = "col-md-2">
+        <div class="form-group">
+          <label for="sel1">Ethnicity:</label>
+          <select class="form-control" id="sel1">
+            <option>African American</option>
+            <option>Asian</option>
+            <option>Chicano/Latino</option>
+            <option>Decline to State</option>
+            <option>International</option>
+            <option>Native American/Alaska Native</option>
+            <option>Pacific Islander</option>
+            <option>White</option>
+          </select>
+        </div>
+    </div>
+
+    <div class = "col-md-2">
+        <div class="form-group">
+          <label for="sel1">Gender:</label>
+          <select class="form-control" id="sel1">
+            <option>Female</option>
+            <option>Male</option>
+            <option>Decline to State</option>
+          </select>
+        </div>
+    </div>
+
+    <div class = "col-md-2">
+        <div class="form-group">
+          <label for="sel1">Residency:</label>
+          <select class="form-control" id="sel1">
+            <option>CA Resident</option>
+            <option>Out of State Domestic</option>
+            <option>International</option>
+          </select>
+        </div>
+    </div>
+
+    <div class = "col-md-2">
+        <div class="form-group">
+          <label for="sel1">Intended College:</label>
+          <select class="form-control" id="sel1">
+            <option>College of Chemistry</option>
+            <option>College of Engineering</option>
+            <option>College of Environmental Design</option>
+            <option>Letters and Sciences</option>
+            <option>College of Natural Resources</option>
+          </select>
+        </div>
+    </div>
+    
+    <button id="submit" onclick='renderChart("Asian", "Male", "CA Resident", "Clg of Engineering")'>What are my chances?</button>
+</div>
+
 <div id ='chart'>
-  <svg style="height: 800px"</svg>
+  <svg style="height: 600px"></svg>
+</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@ var parseYear = d3.time.format("%Y-%y").parse
 	d3.csv(datafile, function(data) {
 
 	    data = data.filter(function(row) {
-	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+	        return row['Ethnicity'] == ethnicity && row['Gender'] == 'Female' && row['Derived Residency'] == residency && row['College'] == college;
 	    })
 	    var datavalues =[]
 	    data.forEach(function(d) {
@@ -53,7 +53,8 @@ var parseYear = d3.time.format("%Y-%y").parse
 CSVtoChart("applied data.csv", "Applied",'#ff7f0e');
 CSVtoChart("admitted data.csv", "Admitted", '#2ca02c');
 CSVtoChart("SIRed data.csv", "Enrolled", '#7777ff');*/
-	
+
+function renderChart(ethnicity, gender, residency, college) {
 
 d3.csv("applied data2.csv", function(line1) {
 	
@@ -62,7 +63,7 @@ d3.csv("applied data2.csv", function(line1) {
     var datavalues3 = []
 
     line1 = line1.filter(function(row) {
-        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+        return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
     })
     
     line1.forEach(function(d) {
@@ -75,7 +76,7 @@ d3.csv("applied data2.csv", function(line1) {
 
     d3.csv("admitted data2.csv", function(line2) {
     	line2 = line2.filter(function(row) {
-        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+        return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
 	    })
 	    line2.forEach(function(d) {
 	    	d.year = parseYear(d.Academic_Yr);
@@ -87,7 +88,7 @@ d3.csv("applied data2.csv", function(line1) {
 
 		d3.csv("SIRed data2.csv", function(line3) {
 	    	line3 = line3.filter(function(row) {
-	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+	        return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
 		    })
 		    line3.forEach(function(d) {
 		    	d.year = parseYear(d.Academic_Yr);
@@ -144,6 +145,7 @@ d3.csv("applied data2.csv", function(line1) {
 			return chart;
 	})
 });
+}
 
 /*nv.addGraph(function() {
 	var chart = nv.models.lineChart()
@@ -183,7 +185,7 @@ function three_lines() {
 	d3.csv("applied data.csv", function(data) {
 		datavalues =[]
 	    data = data.filter(function(row) {
-	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+	        return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
 	    })
 	    data.forEach(function(d) {
 	    	d.year = parseYear(d.Academic_Yr);
@@ -200,7 +202,7 @@ function three_lines() {
 	d3.csv("admitted data.csv", function(data) {
 
 	    data = data.filter(function(row) {
-	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+	        return row['Ethnicity'] == ethnicity && row['Gender'] == 'Female' && row['Derived Residency'] == residency && row['College'] == college;
 	    })
 	    data.forEach(function(d) {
 	    	d.year = parseYear(d.Academic_Yr);
@@ -215,7 +217,7 @@ function three_lines() {
 	d3.csv("SIRed data.csv", function(data) {
 
 	    data = data.filter(function(row) {
-	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+	        return row['Ethnicity'] == ethnicity && row['Gender'] == 'Female' && row['Derived Residency'] == residency && row['College'] == college;
 	    })
 	    data.forEach(function(d) {
 	    	d.year = parseYear(d.Academic_Yr);
