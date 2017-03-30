@@ -55,19 +55,51 @@ CSVtoChart("admitted data.csv", "Admitted", '#2ca02c');
 CSVtoChart("SIRed data.csv", "Enrolled", '#7777ff');*/
 	
 
-/*d3.csv("applied data.csv", function(data) {
+d3.csv("applied data2.csv", function(line1) {
+	
+	var datavalues1 = []
+    var datavalues2 = []
+    var datavalues3 = []
 
-    data = data.filter(function(row) {
+    line1 = line1.filter(function(row) {
         return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
     })
-    var datavalues = []
-    data.forEach(function(d) {
+    
+    line1.forEach(function(d) {
     	d.year = parseYear(d.Academic_Yr);
-    	console.log(d.year)
+    	// console.log(d.year)
     	d.headcounts = +d.Headcounts;
-    	datavalues.push({x: d.year, y: d.headcounts})
+    	datavalues1.push({x: d.year, y: d.headcounts})
     })
-    console.log(data);
+    console.log(line1);
+
+    d3.csv("admitted data2.csv", function(line2) {
+    	line2 = line2.filter(function(row) {
+        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+	    })
+	    line2.forEach(function(d) {
+	    	d.year = parseYear(d.Academic_Yr);
+	    	// console.log(d.year)
+	    	d.headcounts = +d.Headcounts;
+	    	datavalues2.push({x: d.year, y: d.headcounts})
+	    })
+	    console.log(line2);
+
+		d3.csv("SIRed data2.csv", function(line3) {
+	    	line3 = line3.filter(function(row) {
+	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
+		    })
+		    line3.forEach(function(d) {
+		    	d.year = parseYear(d.Academic_Yr);
+		    	// console.log(d.year)
+		    	d.headcounts = +d.Headcounts;
+		    	datavalues3.push({x: d.year, y: d.headcounts})
+		    })
+		    console.log(line3);
+		})
+	})
+
+	
 
 	nv.addGraph(function() {
 		var chart = nv.models.lineChart()
@@ -83,28 +115,37 @@ CSVtoChart("SIRed data.csv", "Enrolled", '#7777ff');*/
 
 			chart.xAxis     //Chart x-axis settings
 	 	 	.axisLabel('Year')
-	 	 	.tickFormat(function(d) { return d3.time.format('%Y')(new Date(d)); });
+	 	 	.tickFormat(function(d) { return d3.time.format('%Y')(new Date(d)); })
+	 	 	;
+
 
 			chart.yAxis     //Chart y-axis settings
 	  		.axisLabel('Number of students')
+
+	  		// chart.forceY([0,2000]);
 	  		// .tickFormat(d3.format('.02f'));
-	  	var applied=[]
-		var admitted=[]
-		var enrolled=[]
+	  	// var applied=[]
+		// var admitted=[]
+		// var enrolled=[]
 	  	// var myData = three_lines(applied, admitted, enrolled);
-	  	// var myData=[ {values: datavalues, key: 'Applied' }]
-	  	// console.log(myData)
+	  	var myData=[ {values: datavalues3, key: 'Enrolled', color: '#7777ff'},
+	  				 {values: datavalues1, key: 'Applied', color: '#ff7f0e'}, 
+	  				 {values: datavalues2, key: 'Admitted', color: '#2ca02c'},
+	  				 
+	  			]
+	  	console.log(myData)
 
 	  	d3.select('#chart svg')
-	  		.datum(three_lines(applied, admitted, enrolled))
-	  		.call(chart);
+	  		.datum(myData)
+	  		.call(chart)
+	  		// .forceY([0,2000]);
 
 	  	nv.utils.windowResize(function() { chart.update() });
 			return chart;
 	})
-});*/
+});
 
-nv.addGraph(function() {
+/*nv.addGraph(function() {
 	var chart = nv.models.lineChart()
             .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
             .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
@@ -123,10 +164,8 @@ nv.addGraph(function() {
 		chart.yAxis     //Chart y-axis settings
   		.axisLabel('Number of students')
   		// .tickFormat(d3.format('.02f'));
-  	var applied=[]
-	var admitted=[]
-	var enrolled=[]
-  	var myData = three_lines(applied, admitted, enrolled);
+  	
+  	var myData = three_lines();
   	// var myData=[ {values: datavalues, key: 'Applied' }]
   	console.log(myData)
 
@@ -138,12 +177,11 @@ nv.addGraph(function() {
 		return chart;
 })
 
-function three_lines(applied, admitted, enrolled) {
-	/*var applied=[]
-	var admitted=[]
-	var enrolled=[]*/
+function three_lines() {
+	var applied=[], admitted=[], enrolled=[];
+	
 	d3.csv("applied data.csv", function(data) {
-
+		datavalues =[]
 	    data = data.filter(function(row) {
 	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
 	    })
@@ -151,12 +189,15 @@ function three_lines(applied, admitted, enrolled) {
 	    	d.year = parseYear(d.Academic_Yr);
 	    	// console.log(d.year);
 	    	d.headcounts = +d.Headcounts;
-	    	applied.push({x: d.year, y: d.headcounts});
+	    	datavalues.push({x: d.year, y: d.headcounts});
 	    })
-	    console.log(applied);
+	   	for (var i = 0; i < datavalues.length; i++) {
+	   		applied.push(datavalues[i]);
+	   	}
+	    // series.push({values: applied, key: 'Applied'})
 	})
-
-	/*d3.csv("admitted data.csv", function(data) {
+	 console.log(applied);
+	d3.csv("admitted data.csv", function(data) {
 
 	    data = data.filter(function(row) {
 	        return row['Ethnicity'] == 'Asian' && row['Gender'] == 'Female' && row['Derived Residency'] == 'CA Resident' && row['College'] == 'Clg of Engineering';
@@ -167,7 +208,8 @@ function three_lines(applied, admitted, enrolled) {
 	    	d.headcounts = +d.Headcounts;
 	    	admitted.push({x: d.year, y: d.headcounts})
 	    })
-	    console.log(admitted);
+	    // console.log(admitted);
+	    // series.push({values: admitted, key: 'Admitted'})
 	})
 
 	d3.csv("SIRed data.csv", function(data) {
@@ -182,11 +224,25 @@ function three_lines(applied, admitted, enrolled) {
 	    	enrolled.push({x: d.year, y: d.headcounts})
 	    })
 	    console.log(enrolled);
-	})*/
+	})
 
-	return [ 
-			{ values: applied, key: 'Applied' },
+	return [
+		{
+			values: applied,
+			key: 'Applied'
+		},
+		{
+			values: admitted,
+			key: 'Admitted'
+		},
+		{
+			values: enrolled,
+			key: 'Enrolled'
+		}
+	];
+	
+	// return [{ values: applied, key: 'Applied', seriesIndex: 0 }];
 		    // { values: admitted, key: 'Admitted' },
 			// { values: enrolled, key: 'Enrolled' }
-	];
-}
+	
+}*/
