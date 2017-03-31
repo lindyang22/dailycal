@@ -1,0 +1,26 @@
+text {
+    font: 12px sans-serif;
+}
+svg {
+    display: block;
+}
+html, body, svg {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+.myrow {
+    font-size: 0;
+}
+.myrow > * {
+    float: none;
+    display: inline-block;
+    font-size: 14px; /* if using LESS it's quicker to just use @font-size-base */
+}
+.myrow > *:last-child {
+    vertical-align: center;
+}
+.myrow p:last-child {
+    margin-bottom: 0; /* optional */
+}

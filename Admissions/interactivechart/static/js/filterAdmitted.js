@@ -1,4 +1,3 @@
-
 var parseYear = d3.time.format("%Y-%y").parse
 
 /*function CSVtoChart(datafile, keyString, colorVal) {
@@ -56,7 +55,7 @@ CSVtoChart("SIRed data.csv", "Enrolled", '#7777ff');*/
 
 function renderChart(ethnicity, gender, residency, college) {
 
-d3.csv("applied data2.csv", function(line1) {
+d3.csv("static/applieddata2.csv", function(line1) {
 	
 	var datavalues1 = []
     var datavalues2 = []
@@ -74,7 +73,7 @@ d3.csv("applied data2.csv", function(line1) {
     })
     console.log(line1);
 
-    d3.csv("admitted data2.csv", function(line2) {
+    d3.csv("static/admitteddata2.csv", function(line2) {
     	line2 = line2.filter(function(row) {
         return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
 	    })
@@ -86,7 +85,7 @@ d3.csv("applied data2.csv", function(line1) {
 	    })
 	    console.log(line2);
 
-		d3.csv("SIRed data2.csv", function(line3) {
+		d3.csv("static/SIReddata2.csv", function(line3) {
 	    	line3 = line3.filter(function(row) {
 	        return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
 		    })
@@ -129,10 +128,10 @@ d3.csv("applied data2.csv", function(line1) {
 		// var admitted=[]
 		// var enrolled=[]
 	  	// var myData = three_lines(applied, admitted, enrolled);
-	  	var myData=[ {values: datavalues3, key: 'Enrolled', color: '#7777ff'},
-	  				 {values: datavalues1, key: 'Applied', color: '#ff7f0e'}, 
-	  				 {values: datavalues2, key: 'Admitted', color: '#2ca02c'},
-	  				 
+	  	var myData=[ 
+	  				 {values: datavalues1, key: 'Applied', color: '#0D84F2'}, 
+	  				 {values: datavalues2, key: 'Admitted', color: '#76D4F9'},
+	  				 {values: datavalues3, key: 'Enrolled', color: '#F5BD12'},
 	  			]
 	  	console.log(myData)
 
