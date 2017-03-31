@@ -101,25 +101,47 @@
     </div>
     
     <div class = "col-md-2" >
-        <button id="submit" onclick='renderChart(getEthnicity(), getGender(), getResidency(), getCollege())'>What are my chances?</button>
+        <input name="updateButton" 
+           type="button" 
+           value="Update" 
+           onclick='renderChart(getEthnicity(), getGender(), getResidency(), getCollege())' />
     </div>
 </div>
 </form>
 
  <script type="text/javascript">
-    var rows = 3
+    /*var rows = 3
 
 
     d3.csv("static/interactivechart/js/testdata.csv", function(d) {
         console.log("soup");
     for (i = 1; i < rows; ++i)
          console.log(d[i]);
-    return 3;});
+    return 3;});*/
+
+    function getEthnicity() {
+    var e = document.getElementById("ethnicity");
+    return e.options[e.selectedIndex].text;
+    }
+
+    function getGender() {
+        var e = document.getElementById("gender");
+        return e.options[e.selectedIndex].text;
+    }
+
+    function getResidency() {
+        var e = document.getElementById("residency");
+        return e.options[e.selectedIndex].text;
+    }
+
+    function getCollege() {
+        var e = document.getElementById("college");
+        return e.options[e.selectedIndex].text;
+    }
         
 var parseYear = d3.time.format("%Y-%y").parse
 function renderChart(ethnicity, gender, residency, college) {
 
-    
     d3.csv("static/interactivechart/js/applieddata2.csv", function(line1) {
         
         var datavalues1 = []
@@ -187,6 +209,7 @@ function renderChart(ethnicity, gender, residency, college) {
                     .showXAxis(true)        //Show the x-axis
                     // .x(function(d) {return d.year})
                     // .y(function(d) {return d.studentCount})
+                    .forceY([0,])
                 ;
 
                 chart.xAxis     //Chart x-axis settings
@@ -208,7 +231,7 @@ function renderChart(ethnicity, gender, residency, college) {
             d3.select('#chart svg')
                 .datum(myData)
                 .call(chart)
-                // .forceY([0,2000]);
+                ;
 
             nv.utils.windowResize(function() { chart.update() });
                 return chart;
