@@ -20,6 +20,6 @@ from django.conf import settings
 
 
 urlpatterns = [
-	url(r'^admissions/', include('interactivechart.urls')),
+	url(r'^', include('interactivechart.urls')),
     url(r'^admin/', admin.site.urls),
 ] 

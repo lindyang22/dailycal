@@ -30,3 +30,4 @@ class Enrolled(models.Model):
 	stats = models.ForeignKey(Student)
 	ENROLLED = 'SIRed'
 
+

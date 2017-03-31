@@ -8,7 +8,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
  
-    # url(r'^static/applieddata2.csv', views.applied),
+    # url(r'^static/csv/applieddata2.csv', views.applied),
     # url(r'^static/admitteddata2.csv', views.admitted),
     # url(r'^static/SIReddata2.csv', views.SIRed)
     # url(r'^$', TemplateView.as_view(template_name='fiterTest.html'))

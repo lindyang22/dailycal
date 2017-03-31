@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<script type="text/javascript" src="../../../../nvd3"></script>
-</head>
-<body>
-<script type="text/javascript">
-/*
- * Convert arbitrary strings to valid css classes.
- * via: https://gist.github.com/mathewbyrne/1280286
- */
-var classify = function(str) {
-    return str.toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start of text
-        .replace(/-+$/, '');            // Trim - from end of text
-}
+<html lang="en">
+  <head>
+    {% include 'interactivechart/_head.html' %}
+    {% block extra-js %}
+    {% endblock extra-js %}
+    {% block extra-css %}
+    {% endblock extra-css %}
+  </head>
+  <body>
+  	<div class="container">
+  		{% include 'interactivechart/intro.html' %}
+  	</div>
 
-</script>
-</body>
+    
+    <div class="container">
+        {% include 'interactivechart/graphic.html' %}
+    </div>
+  </body>
+  <!--
+  Are you a UC Berkeley student who wants to use your coding
+  skills to build impactful projects, analyze real data and
+  tell important stories? Send us an email: projects *at*
+  dailycal.org -->
 </html>
