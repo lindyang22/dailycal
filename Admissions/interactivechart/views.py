@@ -10,14 +10,14 @@ def index(request):
 	template = loader.get_template('interactivechart/graphic.html')
 	return HttpResponse(template.render(request))
 
-def applied(request):
-	return HttpResponse.read("static/applieddata2.csv")
+# def applied(request):
+	# return open("interactivechart/applieddata2.csv")
 
-def admitted(request):
-	return "static/admitteddata2.csv"
+# def admitted(request):
+	# return "static/admitteddata2.csv"
 
-def SIRed(request):
-	return "static/SIRed.csv"
+# def SIRed(request):
+	# return "static/SIRed.csv"
 
 # def user_selection_filter(request, ethnicity, gender, location, college):
 	"""use these values from a drop down menu to grab the data"""

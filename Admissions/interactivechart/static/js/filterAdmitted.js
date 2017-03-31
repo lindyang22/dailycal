@@ -54,8 +54,9 @@ CSVtoChart("admitted data.csv", "Admitted", '#2ca02c');
 CSVtoChart("SIRed data.csv", "Enrolled", '#7777ff');*/
 
 function renderChart(ethnicity, gender, residency, college) {
-
-d3.csv("static/applieddata2.csv", function(line1) {
+// function renderChart(datavalues1, datavalues2, datavalues3) {
+	
+d3.csv("{% 'static/applieddata2.csv' %}", function(line1) {
 	
 	var datavalues1 = []
     var datavalues2 = []
@@ -73,7 +74,7 @@ d3.csv("static/applieddata2.csv", function(line1) {
     })
     console.log(line1);
 
-    d3.csv("static/admitteddata2.csv", function(line2) {
+    d3.csv("{% 'static/admitteddata2.csv' %}", function(line2) {
     	line2 = line2.filter(function(row) {
         return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
 	    })
@@ -85,7 +86,7 @@ d3.csv("static/applieddata2.csv", function(line1) {
 	    })
 	    console.log(line2);
 
-		d3.csv("static/SIReddata2.csv", function(line3) {
+		d3.csv("{% 'static/SIReddata2.csv' %}", function(line3) {
 	    	line3 = line3.filter(function(row) {
 	        return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
 		    })

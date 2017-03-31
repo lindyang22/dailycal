@@ -7,8 +7,8 @@ class Student(models.Model):
 	residency = models.CharField(max_length=100)
 	college = models.CharField(max_length=100)
 	headcount = models.IntegerField()
-	year = models.IntegerField()
-	# STATUS_CHOICES = ((APPLIED,'applied'), (ADMITTED, 'admitted'), (ENROLLED, 'enrolled'))
+	year = models.CharField(max_length=20)
+	status = models.CharField(max_length=20, default='')
 
 	def __str__(self):
 		return self.year + ", " + self.headcount
@@ -18,16 +18,15 @@ class Student(models.Model):
 	year = student.year
 	number = student.headcount"""
 
-"""class Applied(model.Model):
-	stats = models.ForeignKey(Status)
+class Applied(models.Model):
+	stats = models.ForeignKey(Student)
 	APPLIED = 'applied'
 
-class Admitted(model.Model):
-	stats = models.ForeignKey(Status)
+class Admitted(models.Model):
+	stats = models.ForeignKey(Student)
 	ADMITTED = 'admitted'
 
-class Enrolled(model.Model):
-	stats = modles.ForeignKey(Status)
+class Enrolled(models.Model):
+	stats = models.ForeignKey(Student)
 	ENROLLED = 'SIRed'
-"""
 
