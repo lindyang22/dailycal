@@ -20,7 +20,7 @@ class Command(BaseCommand):
         # verbosity = options['verbosity']
         # status = create_objects(options['inname'])
         # inname = "interactivechart/applieddata2.csv"
-        """with open("interactivechart/applieddata2.csv") as infile:
+        with open("interactivechart/applieddata2.csv") as infile:
             inreader = csv.reader(infile)
             indices = 0
             i = 0
@@ -37,7 +37,8 @@ class Command(BaseCommand):
                     headcount = row[4],
                     year = row[5],
                     status = row[6]
-                )"""
+                )
+                student.save()
                 
             # applied_student, created_applied = Applied.objects.get_or_create(stats = student)
                 # i += 1
@@ -48,7 +49,7 @@ class Command(BaseCommand):
             i = 0
             # processed = 0
             for row in inreader:
-                print (i)
+                # print (i)
                 if indices is 0:
                     header = [s.replace('\xef\xbb\xbf', '') for s in row]
                     indices = 1
@@ -65,11 +66,12 @@ class Command(BaseCommand):
                     year = row[5],
                     status = row[6]
                 )
+                student.save()"""
                 
-                i += 1"""
+                
                 
             # admitted_student, created_admitted = Admitted.objects.get_or_create(stats = student)   
-        with open("interactivechart/SIReddata2.csv") as infile2:
+        """with open("interactivechart/SIReddata2.csv") as infile2:
             inreader = csv.reader(infile2)
             indices = 0
             i = 0
@@ -90,6 +92,7 @@ class Command(BaseCommand):
                     year = row[5],
                     status = row[6]
                     )
+                student.save()"""
                 
             # enrolled_student, created_admitted = Enrolled.objects.get_or_create(stats = student) 
 
