@@ -42,6 +42,10 @@
         .myrow p:last-child {
             margin-bottom: 0; /* optional */
         }
+        .tick:not(.zero) {
+          opacity: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -103,7 +107,8 @@
     <div class = "col-md-2" >
         <input name="updateButton" 
            type="button" 
-           value="Update" 
+           class="btn btn-outline-primary"
+           value="What are my chances?" 
            onclick='renderChart(getEthnicity(), getGender(), getResidency(), getCollege())' />
     </div>
 </div>
@@ -142,7 +147,7 @@
 var parseYear = d3.time.format("%Y-%y").parse
 function renderChart(ethnicity, gender, residency, college) {
 
-    d3.csv("static/interactivechart/js/applieddata2.csv", function(line1) {
+    d3.csv("static/interactivechart/csv/applieddata2.csv", function(line1) {
         
         var datavalues1 = []
         var datavalues2 = []
@@ -165,7 +170,7 @@ function renderChart(ethnicity, gender, residency, college) {
         })
         console.log(line1);
 
-        d3.csv("static/interactivechart/js/admitteddata2.csv", function(line2) {
+        d3.csv("static/interactivechart/csv/admitteddata2.csv", function(line2) {
             line2 = line2.filter(function(row) {
             return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
             })
@@ -181,7 +186,7 @@ function renderChart(ethnicity, gender, residency, college) {
             })
             console.log(line2);
 
-            d3.csv("static/interactivechart/js/SIReddata2.csv", function(line3) {
+            d3.csv("static/interactivechart/csv/SIReddata2.csv", function(line3) {
                 line3 = line3.filter(function(row) {
                 return row['Ethnicity'] == ethnicity && row['Gender'] == gender && row['Derived Residency'] == residency && row['College'] == college;
                 })
@@ -200,6 +205,15 @@ function renderChart(ethnicity, gender, residency, college) {
         })
 
         nv.addGraph(function() {
+            var myData=[ 
+                         {values: datavalues1, key: 'Applied', color: '#0D84F2', strokeWidth: '3.5'}, 
+                         {values: datavalues2, key: 'Admitted', color: '#76D4F9', strokeWidth: '3.5'},
+                         {values: datavalues3, key: 'Enrolled', color: '#F5BD12', strokeWidth: '3.5'},
+                    ]
+            var xValues = [];
+            for (var i = 0; i < datavalues1.length; i++) {
+                xValues.push(datavalues1[i].x)
+            }
             var chart = nv.models.lineChart()
                     .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
                     .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
@@ -212,20 +226,21 @@ function renderChart(ethnicity, gender, residency, college) {
                     .forceY([0,])
                 ;
 
+               
+
                 chart.xAxis     //Chart x-axis settings
                 .axisLabel('Year')
+                .scale(d3.scale.ordinal())
+                
                 .tickFormat(function(d) { return d3.time.format('%Y')(new Date(d)); })
+                .tickValues(xValues)
                 ;
 
 
                 chart.yAxis     //Chart y-axis settings
                 .axisLabel('Number of students')
 
-            var myData=[ 
-                         {values: datavalues1, key: 'Applied', color: '#0D84F2'}, 
-                         {values: datavalues2, key: 'Admitted', color: '#76D4F9'},
-                         {values: datavalues3, key: 'Enrolled', color: '#F5BD12'},
-                    ]
+            
             console.log(myData)
 
             d3.select('#chart svg')
